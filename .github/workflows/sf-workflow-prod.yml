@@ -4,7 +4,7 @@ run-name: sf-worflow-prod
 on:
   push:
     branches:
-      - db-prod
+      - 'db-prod'
     paths:
       - 'migrations/**'
 
