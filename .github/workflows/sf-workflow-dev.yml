@@ -37,6 +37,7 @@ jobs:
           SF_SCHEMA_2: ${{ secrets.SF_SCHEMA_2 }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "$githu.repository"
           python --version
           echo "Step 1: Installing schemachange"
           pip install schemachange
