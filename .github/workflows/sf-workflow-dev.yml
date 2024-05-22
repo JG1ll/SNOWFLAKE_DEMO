@@ -26,6 +26,9 @@ jobs:
         uses: actions/setup-python@v2.2.1
         with:
           python-version: 3.8.x
+      - name: Replace schema placeholder
+        run: |
+          sed -i 's/\$SF_SCHEMA_1/${{ secrets.SF_SCHEMA_1 }}/g' $GITHUB_WORKSPACE/migrations/*.sql
 
       - name: Run schemachange
         env:
@@ -35,8 +38,6 @@ jobs:
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DEV_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
-          SF_SCHEMA_1: ${{ secrets.SF_SCHEMA_1 }}
-          SF_SCHEMA_2: ${{ secrets.SF_SCHEMA_2 }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           echo "$githu.repository"
