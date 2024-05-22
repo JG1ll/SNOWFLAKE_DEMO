@@ -27,6 +27,9 @@ jobs:
         with:
           python-version: 3.8.x
 
+      - name: Replace schema placeholder in SQL scripts
+        run: sed -i 's/${SCHEMA_PLACEHOLDER}/${{ secrets.SF_SCHEMA_1 }}/g' $GITHUB_WORKSPACE/migrations/**.sql
+
       - name: Run schemachange
         env:
           SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
