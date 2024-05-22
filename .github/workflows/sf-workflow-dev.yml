@@ -18,17 +18,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: db-dev 
+        uses: actions/checkout@db-dev
 
       - name: Use Python 3.8.x
         uses: actions/setup-python@v2.2.1
         with:
           python-version: 3.8.x
-
-      - name: List directory contents
-        run: ls -R $GITHUB_WORKSPACE
 
       - name: Run schemachange
         env:
