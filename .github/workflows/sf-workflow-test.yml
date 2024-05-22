@@ -4,7 +4,7 @@ run-name: sf-worflow-test
 on:
   push:
     branches:
-      - db-test
+      - 'db-test'
     paths:
       - 'migrations/**'
 
