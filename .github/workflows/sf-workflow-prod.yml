@@ -1,4 +1,4 @@
-run-name: sf-worflow-prod
+name: sf-worflow-prod
 
 # Controls when the action will run. 
 on:
