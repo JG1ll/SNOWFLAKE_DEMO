@@ -17,8 +17,10 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: db-dev 
 
       - name: Use Python 3.8.x
         uses: actions/setup-python@v2.2.1
