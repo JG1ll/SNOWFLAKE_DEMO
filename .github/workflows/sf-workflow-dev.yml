@@ -4,7 +4,7 @@ run-name: sf-worflow-dev
 on:
   push:
     branches:
-      - db-dev
+      - 'db-dev'
     paths:
       - 'migrations/**'
 
