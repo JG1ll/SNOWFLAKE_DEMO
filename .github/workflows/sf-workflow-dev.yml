@@ -1,10 +1,10 @@
-name: snowflake-devops-demo
+run-name: sf-worflow-dev
 
 # Controls when the action will run. 
 on:
   push:
     branches:
-      - main
+      - db-dev
     paths:
       - 'migrations/**'
 
@@ -31,8 +31,10 @@ jobs:
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
           SF_ROLE: ${{ secrets.SF_ROLE }}
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
-          SF_DATABASE: ${{ secrets.SF_DATABASE }}
+          SF_DATABASE: ${{ secrets.SF_DEV_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
+          SF_SCHEMA_1: ${{ secrets.SF_SCHEMA_1 }}
+          SF_SCHEMA_2: ${{ secrets.SF_SCHEMA_2 }}
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
