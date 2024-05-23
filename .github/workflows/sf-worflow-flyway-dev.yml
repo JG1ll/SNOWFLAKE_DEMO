@@ -1,0 +1,44 @@
+name: sf-workflow-flyway-dev
+
+# Controls when the action will run.
+on:
+  push:
+    branches:
+      - db-flyway
+    paths:
+      - 'migrations/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy-snowflake-changes-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: db-flyway
+
+      - name: Use Python 3.8.x
+        uses: actions/setup-python@v2.2.1
+        with:
+          python-version: 3.8.x
+
+      - name: Install Flyway
+        run: |
+          echo "Installing Flyway"
+          wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/7.10.0/flyway-commandline-7.10.0-linux-x64.tar.gz | tar xvz
+          export PATH="$PATH:$GITHUB_WORKSPACE/flyway-7.10.0"
+
+      - name: Run Flyway Migrations
+        env:
+          FLYWAY_URL: jdbc:snowflake://${{ secrets.SF_ACCOUNT }}.snowflakecomputing.com/?db=${{ secrets.SF_FLYWAY_DB }}&schema=${{ secrets.SF_SCHEMA_DEV }}
+          FLYWAY_USER: ${{ secrets.SF_USERNAME }}
+          FLYWAY_PASSWORD: ${{ secrets.SF_PASSWORD }}
+          FLYWAY_LOCATIONS: filesystem:$GITHUB_WORKSPACE/migrations
+        run: |
+          echo "Running Flyway migrations"
+          flyway -locations=filesystem:$GITHUB_WORKSPACE/migrations migrate
