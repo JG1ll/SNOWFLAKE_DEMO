@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-python@v2.2.1
         with:
           python-version: 3.8.x
-ß
+
       - name: Install Flyway
         run: |
           echo "Installing Flyway"
