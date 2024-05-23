@@ -1,6 +1,6 @@
 name: sf-worflow-dev
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   push:
     branches:
@@ -27,8 +27,8 @@ jobs:
         with:
           python-version: 3.8.x
 
-      - name: Replace schema placeholder in SQL scripts
-        run: sed -i 's/${SCHEMA_PLACEHOLDER}/${{ secrets.SF_SCHEMA_1 }}/g' $GITHUB_WORKSPACE/migrations/**.sql
+#      - name: Replace schema placeholder in SQL scripts
+#        run: sed -i 's/${SCHEMA_PLACEHOLDER}/${{ secrets.SF_SCHEMA_1 }}/g' $GITHUB_WORKSPACE/migrations/**.sql
 
       - name: Run schemachange
         env:
@@ -47,4 +47,4 @@ jobs:
           pip install schemachange
           
           echo "Step 2: Running schemachange"
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -s $SF_SCHEMA_1 -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
