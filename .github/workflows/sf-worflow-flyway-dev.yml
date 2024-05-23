@@ -41,4 +41,4 @@ jobs:
           FLYWAY_LOCATIONS: filesystem:$GITHUB_WORKSPACE/migrations
         run: |
           echo "Running Flyway migrations"
-          flyway -locations=filesystem:$GITHUB_WORKSPACE/migrations migrate
+          $GITHUB_WORKSPACE/flyway-7.10.0/flyway migrate
