@@ -33,10 +33,10 @@ jobs:
           wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.13.0/flyway-commandline-10.13.0-linux-x64.tar.gz | tar xvz
           export PATH="$PATH:$GITHUB_WORKSPACE/flyway-10.13.0"
 
-      - name: List migrations directory for debugging
-        run: |
-          echo "Listing contents of migrations directory"
-          ls -al $GITHUB_WORKSPACE/migrations
+      # - name: List migrations directory for debugging
+      #   run: |
+      #     echo "Listing contents of migrations directory"
+      #     ls -al $GITHUB_WORKSPACE/migrations
 
       - name: Run Flyway Migrations
         env:
