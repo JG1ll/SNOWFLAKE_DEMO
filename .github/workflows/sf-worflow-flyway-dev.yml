@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Check out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -43,8 +43,7 @@ jobs:
           FLYWAY_URL: jdbc:snowflake://${{ secrets.SF_ACCOUNT }}.snowflakecomputing.com/?db=${{ secrets.SF_FLYWAY_DB }}&schema=${{ secrets.SF_SCHEMA_DEV }}
           FLYWAY_USER: ${{ secrets.SF_USERNAME }}
           FLYWAY_PASSWORD: ${{ secrets.SF_PASSWORD }}
-          FLYWAY_LOCATIONS: filesystem:$GITHUB_WORKSPACE/migrations
         run: |
           echo "Running Flyway migrations"
           export JAVA_TOOL_OPTIONS="--add-opens=java.base/java.nio=ALL-UNNAMED"
-          $GITHUB_WORKSPACE/flyway-10.13.0/flyway migrate
+          $GITHUB_WORKSPACE/flyway-10.13.0/flyway -locations=filesystem:$GITHUB_WORKSPACE/migrations -X migrate
