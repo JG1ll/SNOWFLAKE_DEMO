@@ -30,8 +30,8 @@ jobs:
       - name: Install Flyway
         run: |
           echo "Installing Flyway"
-          wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/7.10.0/flyway-commandline-7.10.0-linux-x64.tar.gz | tar xvz
-          export PATH="$PATH:$GITHUB_WORKSPACE/flyway-7.10.0"
+          wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.13.0/flyway-commandline-10.13.0-linux-x64.tar.gz | tar xvz
+          export PATH="$PATH:$GITHUB_WORKSPACE/flyway-10.13.0"
 
       - name: Run Flyway Migrations
         env:
@@ -41,4 +41,4 @@ jobs:
           FLYWAY_LOCATIONS: filesystem:$GITHUB_WORKSPACE/migrations
         run: |
           echo "Running Flyway migrations"
-          $GITHUB_WORKSPACE/flyway-7.10.0/flyway migrate
+          $GITHUB_WORKSPACE/flyway-10.13.0/flyway migrate
